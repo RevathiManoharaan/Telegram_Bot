@@ -2,6 +2,7 @@
 from telegram.ext import Updater
 from telegram.ext import CommandHandler
 from telegram.ext import MessageHandler, Filters
+import jaathagam as j
 #variables
 updater = Updater(token='1070149077:AAFzahRVuCQdWt8HyTUypp_g0G4aSIXmSaQ', use_context=True)
 dispatcher = updater.dispatcher
@@ -11,7 +12,14 @@ def start(update, context):
 def echo(update, context):
     context.bot.send_message(chat_id=update.effective_chat.id, text=update.message.text)
 def setdate(update, context):
-    context.bot.send_message(chat_id=update.effective_chat.id, text="I'm a POS")
+    ddmm = update.message.text[9:]
+    day=int(ddmm[:2])
+    month=int(ddmm[2:])
+    print(day)
+    print(month)
+    sign= j.getraasi(day,month)
+    context.bot.send_message(chat_id=update.effective_chat.id, text="Your sign is "+sign)
+
 def jaathagam(update, context):
     context.bot.send_message(chat_id=update.effective_chat.id, text="I will predict the future!")
 #main
